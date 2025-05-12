@@ -3,7 +3,7 @@ Contributors: catchplugins, catchthemes, sakinshrestha, pratikshrestha, maheshma
 Donate link: https://catchplugins.com/plugins/catch-scroll-progress-bar/
 Tags: progressbar, scroll, reading, progress bar
 Requires at least: 5.9
-Tested up to: 6.5
+Tested up to: 6.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,6 +43,9 @@ Not so easy way (via FTP) :
 1. Main page
 
 == Changelog ==
+
+= 1.6.6 (Released: May 12, 2024) =
+* Compatibility check up to version 6.8
 
 = 1.6.5 (Released: April 16, 2024) =
 * Compatibility check up to version 6.5

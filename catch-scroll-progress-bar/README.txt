@@ -44,7 +44,7 @@ Not so easy way (via FTP) :
 
 == Changelog ==
 
-= 1.6.6 (Released: May 12, 2024) =
+= 1.6.6 (Released: May 12, 2025) =
 * Compatibility check up to version 6.8
 
 = 1.6.5 (Released: April 16, 2024) =

@@ -1,10 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if (! defined('ABSPATH')) exit;
+
 /**
  * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
  *
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
@@ -14,7 +14,8 @@
  * @subpackage Catch_Scroll_Progress_Bar/includes
  * @author     Catch Plugins <www.catchplugins.com>
  */
-class Catch_Scroll_Progress_Bar {
+class Catch_Scroll_Progress_Bar
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -53,7 +54,8 @@ class Catch_Scroll_Progress_Bar {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
 		$this->version = CATCH_SCROLL_PROGRESS_BAR_VERSION;
 
@@ -63,7 +65,6 @@ class Catch_Scroll_Progress_Bar {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -82,33 +83,33 @@ class Catch_Scroll_Progress_Bar {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-catch-scroll-progress-bar-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-catch-scroll-progress-bar-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-catch-scroll-progress-bar-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-catch-scroll-progress-bar-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-catch-scroll-progress-bar-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-catch-scroll-progress-bar-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-catch-scroll-progress-bar-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-catch-scroll-progress-bar-public.php';
 
 		$this->loader = new Catch_Scroll_Progress_Bar_Loader();
-
 	}
 
 	/**
@@ -120,12 +121,12 @@ class Catch_Scroll_Progress_Bar {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Catch_Scroll_Progress_Bar_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**
@@ -135,17 +136,17 @@ class Catch_Scroll_Progress_Bar {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new Catch_Scroll_Progress_Bar_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Catch_Scroll_Progress_Bar_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_settings_menu' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
-		$this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'action_links', 10, 2 );
-		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_meta_links', 10, 2 );
-
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+		$this->loader->add_action('admin_menu', $plugin_admin, 'add_plugin_settings_menu');
+		$this->loader->add_action('admin_init', $plugin_admin, 'register_settings');
+		$this->loader->add_filter('plugin_action_links', $plugin_admin, 'action_links', 10, 2);
+		$this->loader->add_filter('plugin_row_meta', $plugin_admin, 'add_plugin_meta_links', 10, 2);
 	}
 
 	/**
@@ -155,14 +156,14 @@ class Catch_Scroll_Progress_Bar {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new Catch_Scroll_Progress_Bar_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Catch_Scroll_Progress_Bar_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'show_it' );
-
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->loader->add_action('wp_footer', $plugin_public, 'show_it');
 	}
 
 	/**
@@ -170,7 +171,8 @@ class Catch_Scroll_Progress_Bar {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -181,7 +183,8 @@ class Catch_Scroll_Progress_Bar {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -191,7 +194,8 @@ class Catch_Scroll_Progress_Bar {
 	 * @since     1.0.0
 	 * @return    Catch_Scroll_Progress_Bar_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -201,8 +205,8 @@ class Catch_Scroll_Progress_Bar {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
-
 }

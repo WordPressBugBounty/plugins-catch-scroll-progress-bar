@@ -3,8 +3,8 @@ Contributors: catchplugins, catchthemes, sakinshrestha, pratikshrestha, maheshma
 Donate link: https://catchplugins.com/plugins/catch-scroll-progress-bar/
 Tags: progressbar, scroll, reading, progress bar
 Requires at least: 5.9
-Tested up to: 6.8
-Stable tag: trunk
+Tested up to: 6.9
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,12 @@ Not so easy way (via FTP) :
 1. Main page
 
 == Changelog ==
+
+= 2.0 (Released: February 05, 2026) =
+* Bug Fixed: WordPress.Security.EscapeOutput.OutputNotEscaped
+* Bug Fixed: missing_direct_file_access_protection
+* Bug Fixed: WordPress.WP.I18n.MissingArgDomain
+* Compatibility check up to version 6.9.1
 
 = 1.6.6 (Released: May 12, 2025) =
 * Compatibility check up to version 6.8

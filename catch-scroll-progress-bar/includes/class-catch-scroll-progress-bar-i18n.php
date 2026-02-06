@@ -14,7 +14,8 @@
  */
 
 
-class Catch_Scroll_Progress_Bar_i18n {
+class Catch_Scroll_Progress_Bar_i18n
+{
 
 
 	/**
@@ -22,16 +23,13 @@ class Catch_Scroll_Progress_Bar_i18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	public function load_plugin_textdomain()
+	{
 
 		load_plugin_textdomain(
 			'catch-scroll-progress-bar',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
 		);
-
 	}
-
-
-
 }

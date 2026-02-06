@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly
+if (! defined('ABSPATH')) exit;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -8,19 +11,12 @@
  *
  * @package    Catch_Scroll_Progress_Bar
  * @subpackage Catch_Scroll_Progress_Bar/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Catch_Scroll_Progress_Bar
- * @subpackage Catch_Scroll_Progress_Bar/public
  * @author     Catch Plugins <www.catchplugins.com>
  */
-class Catch_Scroll_Progress_Bar_Public {
+
+
+class Catch_Scroll_Progress_Bar_Public
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,11 +43,11 @@ class Catch_Scroll_Progress_Bar_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -59,7 +55,8 @@ class Catch_Scroll_Progress_Bar_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,7 +70,7 @@ class Catch_Scroll_Progress_Bar_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/catch-scroll-progress-bar-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/catch-scroll-progress-bar-public.css', array(), $this->version, 'all');
 
 		$settings           = catch_progress_bar_get_options();
 		$height             = $settings['bar_height'];
@@ -84,7 +81,7 @@ class Catch_Scroll_Progress_Bar_Public {
 		$position           = $settings['progress_bar_position'];
 		$radius             = $settings['radius'];
 
-		if( 'top' === $position ) {
+		if ('top' === $position) {
 			$top    = 0;
 			$bottom = 'auto';
 		} else {
@@ -120,7 +117,6 @@ class Catch_Scroll_Progress_Bar_Public {
 		";
 
 		wp_add_inline_style('catch-scroll-progress-bar', $custom_css);
-
 	}
 
 	/**
@@ -128,7 +124,8 @@ class Catch_Scroll_Progress_Bar_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -142,38 +139,39 @@ class Catch_Scroll_Progress_Bar_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/catch-scroll-progress-bar-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/catch-scroll-progress-bar-public.js', array('jquery'), $this->version, false);
 	}
-	public function show_it() {
+	public function show_it()
+	{
 		$settings = catch_progress_bar_get_options();
-		if( isset($settings['home']) && 1==$settings['home'] && (is_front_page())){
+		if (isset($settings['home']) && 1 == $settings['home'] && (is_front_page())) {
 			display_progress_bar();
-		} elseif ( isset($settings['blog']) && 1==$settings['blog'] && (is_home() && !is_front_page()) ) {
+		} elseif (isset($settings['blog']) && 1 == $settings['blog'] && (is_home() && !is_front_page())) {
 			display_progress_bar();
-		} elseif ( isset($settings['archive']) && 1==$settings['archive']&& (is_archive()) ) {
+		} elseif (isset($settings['archive']) && 1 == $settings['archive'] && (is_archive())) {
 			display_progress_bar();
-		}  elseif ( isset( $settings['single'] ) && ( is_singular() && !is_front_page() ) ) {
+		} elseif (isset($settings['single']) && (is_singular() && !is_front_page())) {
 			$optionPostTypes = $settings['field_posttypes'];
 			$currentPostType = get_post_type();
-			if ( isset( $optionPostTypes[$currentPostType] ) && ( $optionPostTypes[$currentPostType] == 1 ) ) {
+			if (isset($optionPostTypes[$currentPostType]) && ($optionPostTypes[$currentPostType] == 1)) {
 				display_progress_bar();
-			} 
 			}
+		}
 	}
 }
 
-	function display_progress_bar() {
-		$settings           = catch_progress_bar_get_options();
-		$height             = $settings['bar_height'];
-		$foreground_color   = $settings['foreground_color'];
-		$background_color   = $settings['background_color'];
-		$background_opacity = $settings['background_opacity'];
-		$foreground_opacity = $settings['foreground_opacity'];
-		$position           = $settings['progress_bar_position'];
-		$radius             = $settings['radius'];
+function display_progress_bar()
+{
+	$settings           = catch_progress_bar_get_options();
+	$height             = $settings['bar_height'];
+	$foreground_color   = $settings['foreground_color'];
+	$background_color   = $settings['background_color'];
+	$background_opacity = $settings['background_opacity'];
+	$foreground_opacity = $settings['foreground_opacity'];
+	$position           = $settings['progress_bar_position'];
+	$radius             = $settings['radius'];
 
-		// echo "<progress data-height={$height} data-radius={$radius} data-foreground={$foreground_color} data-background={$background_color} data-position={$position} data-background-opacity={$background_opacity} data-foreground-opacity={$foreground_opacity} class='catchProgressbar' value='0'>
-		// </progress>";
-		echo "<progress class='catchProgressbar' value='0'></progress>";
-	}
+	// echo "<progress data-height={$height} data-radius={$radius} data-foreground={$foreground_color} data-background={$background_color} data-position={$position} data-background-opacity={$background_opacity} data-foreground-opacity={$foreground_opacity} class='catchProgressbar' value='0'>
+	// </progress>";
+	echo "<progress class='catchProgressbar' value='0'></progress>";
+}

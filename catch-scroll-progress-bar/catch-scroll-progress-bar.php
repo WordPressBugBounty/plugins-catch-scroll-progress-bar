@@ -14,11 +14,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Catch Scroll Progress Bar
- * Plugin URI:        wordpress.org/plugins/catch-scroll-progress-bar
+ * Plugin URI:        https://wordpress.org/plugins/catch-scroll-progress-bar
  * Description:       This is a simple, super-light WordPress progress bar plugin that has the most essential features to show the users how far they’ve scrolled through the current page or post
- * Version:           1.6.6
+ * Version:           2.0
  * Author:            Catch Plugins
- * Author URI:        www.catchplugins.com
+ * Author URI:        https://www.catchplugins.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       catch-scroll-progress-bar
@@ -26,40 +26,33 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (! defined('WPINC')) {
 	die;
 }
 
-/**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define( 'CATCH_SCROLL_PROGRESS_BAR_VERSION', '1.6.6' );
-
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-catch-scroll-progress-bar-activator.php
- */
-// The URL of the directory that contains the plugin
-if ( ! defined( 'CATCH_SCROLL_PROGRESS_BAR_URL' ) ) {
-	define( 'CATCH_SCROLL_PROGRESS_BAR_URL', plugin_dir_url( __FILE__ ) );
+// Define Version
+if (! defined('CATCH_SCROLL_PROGRESS_BAR_VERSION')) {
+	define('CATCH_SCROLL_PROGRESS_BAR_VERSION', '2.0');
 }
 
+// The URL of the directory that contains the plugin
+if (! defined('CATCH_SCROLL_PROGRESS_BAR_URL')) {
+	define('CATCH_SCROLL_PROGRESS_BAR_URL', plugin_dir_url(__FILE__));
+}
 
 // The absolute path of the directory that contains the file
-if ( ! defined( 'CATCH_SCROLL_PROGRESS_BAR_PATH' ) ) {
-	define( 'CATCH_SCROLL_PROGRESS_BAR_PATH', plugin_dir_path( __FILE__ ) );
+if (! defined('CATCH_SCROLL_PROGRESS_BAR_PATH')) {
+	define('CATCH_SCROLL_PROGRESS_BAR_PATH', plugin_dir_path(__FILE__));
 }
-
 
 // Gets the path to a plugin file or directory, relative to the plugins directory, without the leading and trailing slashes.
-if ( ! defined( 'CATCH_SCROLL_PROGRESS_BAR_BASENAME' ) ) {
-	define( 'CATCH_SCROLL_PROGRESS_BAR_BASENAME', plugin_basename( __FILE__ ) );
+if (! defined('CATCH_SCROLL_PROGRESS_BAR_BASENAME')) {
+	define('CATCH_SCROLL_PROGRESS_BAR_BASENAME', plugin_basename(__FILE__));
 }
 
-function activate_catch_scroll_progress_bar() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-catch-scroll-progress-bar-activator.php';
+function activate_catch_scroll_progress_bar()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-catch-scroll-progress-bar-activator.php';
 	Catch_Scroll_Progress_Bar_Activator::activate();
 }
 
@@ -67,19 +60,20 @@ function activate_catch_scroll_progress_bar() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-catch-scroll-progress-bar-deactivator.php
  */
-function deactivate_catch_scroll_progress_bar() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-catch-scroll-progress-bar-deactivator.php';
+function deactivate_catch_scroll_progress_bar()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-catch-scroll-progress-bar-deactivator.php';
 	Catch_Scroll_Progress_Bar_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_catch_scroll_progress_bar' );
-register_deactivation_hook( __FILE__, 'deactivate_catch_scroll_progress_bar' );
+register_activation_hook(__FILE__, 'activate_catch_scroll_progress_bar');
+register_deactivation_hook(__FILE__, 'deactivate_catch_scroll_progress_bar');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-catch-scroll-progress-bar.php';
+require plugin_dir_path(__FILE__) . 'includes/class-catch-scroll-progress-bar.php';
 
 /**
  * Begins execution of the plugin.
@@ -90,23 +84,25 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-catch-scroll-progress-bar.
  *
  * @since    1.0.0
  */
-if ( ! function_exists( 'catch_progress_bar_get_options' ) ) :
-	function catch_progress_bar_get_options() {
+if (! function_exists('catch_progress_bar_get_options')) :
+	function catch_progress_bar_get_options()
+	{
 		$defaults = catch_progress_bar_default_options();
-		$options  = get_option( 'catch_progress_bar_options', $defaults );
-		return wp_parse_args( $options, $defaults );
+		$options  = get_option('catch_progress_bar_options', $defaults);
+		return wp_parse_args($options, $defaults);
 	}
 endif;
 
 
-if ( ! function_exists( 'catch_progress_bar_default_options' ) ) :
+if (! function_exists('catch_progress_bar_default_options')) :
 	/**
 	 * Return array of default options
 	 *
 	 * @since     1.0
 	 * @return    array    default options.
 	 */
-	function catch_progress_bar_default_options( $option = null ) {
+	function catch_progress_bar_default_options($option = null)
+	{
 		$default_options = array(
 
 			'status'                => 1,
@@ -125,37 +121,38 @@ if ( ! function_exists( 'catch_progress_bar_default_options' ) ) :
 			'radius'                => '8',
 		);
 
-		if ( null == $option ) {
-			return apply_filters( 'catch_progress_bar_deafault_options', $default_options );
+		if (null == $option) {
+			return apply_filters('catch_progress_bar_deafault_options', $default_options);
 		} else {
-			return $default_options[ $option ];
+			return $default_options[$option];
 		}
 	}
 endif; // catch_progress_bar_default_options
-function catch_progress_bar_position() {
+function catch_progress_bar_position()
+{
 	$options = array(
-		'top'    => esc_html__( 'Top', 'catch-scroll-progress-bar' ),
-		'bottom' => esc_html__( 'Bottom', 'catch-scroll-progress-bar' ),
+		'top'    => esc_html__('Top', 'catch-scroll-progress-bar'),
+		'bottom' => esc_html__('Bottom', 'catch-scroll-progress-bar'),
 
 	);
 	return $options;
 }
 
-function run_catch_scroll_progress_bar() {
+function run_catch_scroll_progress_bar()
+{
 
 	$plugin = new Catch_Scroll_Progress_Bar();
 	$plugin->run();
-
 }
 run_catch_scroll_progress_bar();
 
 /* CTP tabs removal options */
-require plugin_dir_path( __FILE__ ) . '/includes/ctp-tabs-removal.php';
+require plugin_dir_path(__FILE__) . '/includes/ctp-tabs-removal.php';
 
- $ctp_options = ctp_get_options();
-if ( 1 == $ctp_options['theme_plugin_tabs'] ) {
+$ctp_options = ctp_get_options();
+if (1 == $ctp_options['theme_plugin_tabs']) {
 	/* Adds Catch Themes tab in Add theme page and Themes by Catch Themes in Customizer's change theme option. */
-	if ( ! class_exists( 'CatchThemesThemePlugin' ) && ! function_exists( 'add_our_plugins_tab' ) ) {
-		require plugin_dir_path( __FILE__ ) . '/includes/CatchThemesThemePlugin.php';
+	if (! class_exists('CatchThemesThemePlugin') && ! function_exists('add_our_plugins_tab')) {
+		require plugin_dir_path(__FILE__) . '/includes/CatchThemesThemePlugin.php';
 	}
 }

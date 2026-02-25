@@ -16,7 +16,7 @@
  * Plugin Name:       Catch Scroll Progress Bar
  * Plugin URI:        https://wordpress.org/plugins/catch-scroll-progress-bar
  * Description:       This is a simple, super-light WordPress progress bar plugin that has the most essential features to show the users how far they’ve scrolled through the current page or post
- * Version:           2.0
+ * Version:           2.1
  * Author:            Catch Plugins
  * Author URI:        https://www.catchplugins.com
  * License:           GPL-2.0+
@@ -32,7 +32,7 @@ if (! defined('WPINC')) {
 
 // Define Version
 if (! defined('CATCH_SCROLL_PROGRESS_BAR_VERSION')) {
-	define('CATCH_SCROLL_PROGRESS_BAR_VERSION', '2.0');
+	define('CATCH_SCROLL_PROGRESS_BAR_VERSION', '2.1');
 }
 
 // The URL of the directory that contains the plugin

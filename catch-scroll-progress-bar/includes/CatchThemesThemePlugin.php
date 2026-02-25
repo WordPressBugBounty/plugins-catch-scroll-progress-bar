@@ -146,7 +146,7 @@ class CatchThemesThemePlugin
 	{
 
 		if ('theme-install.php' === $hook_suffix) {
-			wp_enqueue_script('our-themes-script', plugin_dir_url(__FILE__) . '../js/our-themes.js', array('jquery'), '2018-05-16');
+			wp_enqueue_script('our-themes-script', plugin_dir_url(__FILE__) . '../admin/js/our-themes.js', array('jquery'), '2018-05-16');
 		}
 	}
 

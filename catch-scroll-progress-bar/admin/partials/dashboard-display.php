@@ -22,18 +22,16 @@ if (! defined('ABSPATH')) exit;
 			<h2><?php esc_html_e('Settings', 'catch-scroll-progress-bar'); ?></h2>
 		</div> <!-- .Header -->
 		<div class="content">
-			<?php if (isset($_GET['settings-updated'])) { ?>
+			<?php if (isset($_GET['settings-updated'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 				<div id="message" class="notice updated fade">
 					<p><strong><?php esc_html_e('Plugin Options Saved.', 'catch-scroll-progress-bar') ?></strong></p>
 				</div>
 			<?php } ?>
-			<?php // Use nonce for verification.
-			wp_nonce_field(CATCH_SCROLL_PROGRESS_BAR_BASENAME, 'catch_progress_bar_nonce');
-			?>
 			<div id="progress_main">
 				<form method="post" action="options.php">
 					<?php settings_fields('catch-scroll-progress-bar-group'); ?>
 					<?php
+					// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template partial; variables are local to this included file, not injected into the true global scope.
 					$defaults = catch_progress_bar_default_options();
 					$settings = catch_progress_bar_get_options();
 					?>
@@ -176,7 +174,9 @@ if (! defined('ABSPATH')) exit;
 												}
 											} ?>
 
-										</div>
+										</div><!-- post-type checkboxes -->
+									</td>
+								</tr>
 
 								<tr>
 									<th scope="row"><?php esc_html_e('Reset Options', 'catch-scroll-progress-bar'); ?></th>
@@ -197,3 +197,4 @@ if (! defined('ABSPATH')) exit;
 		</div><!-- .content -->
 	</div><!-- .content-wrapper -->
 </div><!---catch--progress-->
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

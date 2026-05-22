@@ -16,7 +16,7 @@
  * Plugin Name:       Catch Scroll Progress Bar
  * Plugin URI:        https://wordpress.org/plugins/catch-scroll-progress-bar
  * Description:       This is a simple, super-light WordPress progress bar plugin that has the most essential features to show the users how far they’ve scrolled through the current page or post
- * Version:           2.1
+ * Version:           2.2
  * Author:            Catch Plugins
  * Author URI:        https://www.catchplugins.com
  * License:           GPL-2.0+
@@ -32,7 +32,7 @@ if (! defined('WPINC')) {
 
 // Define Version
 if (! defined('CATCH_SCROLL_PROGRESS_BAR_VERSION')) {
-	define('CATCH_SCROLL_PROGRESS_BAR_VERSION', '2.1');
+	define('CATCH_SCROLL_PROGRESS_BAR_VERSION', '2.2');
 }
 
 // The URL of the directory that contains the plugin
@@ -50,7 +50,7 @@ if (! defined('CATCH_SCROLL_PROGRESS_BAR_BASENAME')) {
 	define('CATCH_SCROLL_PROGRESS_BAR_BASENAME', plugin_basename(__FILE__));
 }
 
-function activate_catch_scroll_progress_bar()
+function catch_scroll_progress_bar_activate()
 {
 	require_once plugin_dir_path(__FILE__) . 'includes/class-catch-scroll-progress-bar-activator.php';
 	Catch_Scroll_Progress_Bar_Activator::activate();
@@ -60,14 +60,14 @@ function activate_catch_scroll_progress_bar()
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-catch-scroll-progress-bar-deactivator.php
  */
-function deactivate_catch_scroll_progress_bar()
+function catch_scroll_progress_bar_deactivate()
 {
 	require_once plugin_dir_path(__FILE__) . 'includes/class-catch-scroll-progress-bar-deactivator.php';
 	Catch_Scroll_Progress_Bar_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_catch_scroll_progress_bar');
-register_deactivation_hook(__FILE__, 'deactivate_catch_scroll_progress_bar');
+register_activation_hook(__FILE__, 'catch_scroll_progress_bar_activate');
+register_deactivation_hook(__FILE__, 'catch_scroll_progress_bar_deactivate');
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -122,7 +122,7 @@ if (! function_exists('catch_progress_bar_default_options')) :
 		);
 
 		if (null == $option) {
-			return apply_filters('catch_progress_bar_deafault_options', $default_options);
+			return apply_filters('catch_progress_bar_default_options', $default_options);
 		} else {
 			return $default_options[$option];
 		}
@@ -138,19 +138,18 @@ function catch_progress_bar_position()
 	return $options;
 }
 
-function run_catch_scroll_progress_bar()
+function catch_scroll_progress_bar_run()
 {
-
 	$plugin = new Catch_Scroll_Progress_Bar();
 	$plugin->run();
 }
-run_catch_scroll_progress_bar();
+catch_scroll_progress_bar_run();
 
 /* CTP tabs removal options */
 require plugin_dir_path(__FILE__) . '/includes/ctp-tabs-removal.php';
 
-$ctp_options = ctp_get_options();
-if (1 == $ctp_options['theme_plugin_tabs']) {
+$catch_progress_bar_ctp_options = ctp_get_options(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- ctp_ is a shared Catch library prefix.
+if (1 == $catch_progress_bar_ctp_options['theme_plugin_tabs']) {
 	/* Adds Catch Themes tab in Add theme page and Themes by Catch Themes in Customizer's change theme option. */
 	if (! class_exists('CatchThemesThemePlugin') && ! function_exists('add_our_plugins_tab')) {
 		require plugin_dir_path(__FILE__) . '/includes/CatchThemesThemePlugin.php';

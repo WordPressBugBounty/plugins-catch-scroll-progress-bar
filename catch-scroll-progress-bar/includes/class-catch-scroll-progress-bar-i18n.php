@@ -23,13 +23,15 @@ class Catch_Scroll_Progress_Bar_i18n
 	 *
 	 * @since    1.0.0
 	 */
+	/**
+	 * WordPress 4.6+ automatically loads translations for plugins hosted on
+	 * WordPress.org. Calling load_plugin_textdomain() manually is no longer
+	 * needed and is discouraged by Plugin Check.
+	 *
+	 * @since 2.2
+	 */
 	public function load_plugin_textdomain()
 	{
-
-		load_plugin_textdomain(
-			'catch-scroll-progress-bar',
-			false,
-			dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
-		);
+		// Intentionally empty: WordPress auto-loads plugin translations.
 	}
 }

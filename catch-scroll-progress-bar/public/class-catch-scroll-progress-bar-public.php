@@ -89,6 +89,16 @@ class Catch_Scroll_Progress_Bar_Public
 			$top    = 'auto';
 		}
 
+		// Sanitize each setting before embedding into CSS output.
+		$height             = absint( $height );
+		$radius             = absint( $radius );
+		$background_color   = sanitize_hex_color( $background_color );
+		$foreground_color   = sanitize_hex_color( $foreground_color );
+		$background_opacity = floatval( $background_opacity );
+		$foreground_opacity = floatval( $foreground_opacity );
+		$top                = ( 0 === $top ) ? '0' : 'auto';
+		$bottom             = ( 0 === $bottom ) ? '0' : 'auto';
+
 		$custom_css = "
 			.catchProgressbar {
 				height: {$height}px;
@@ -99,20 +109,20 @@ class Catch_Scroll_Progress_Bar_Public
 				border-radius: {$radius}px;
 			}
 
-			.catchProgressbar::-webkit-progress-bar { 
-				background-color: transparent; 
-			} 
-			.catchProgressbar::-webkit-progress-value { 
+			.catchProgressbar::-webkit-progress-bar {
+				background-color: transparent;
+			}
+			.catchProgressbar::-webkit-progress-value {
 				background-color: {$foreground_color};
 				border-radius: {$radius}px;
-				opacity: {$foreground_opacity}; 
-			} 
+				opacity: {$foreground_opacity};
+			}
 
 			.catchProgressbar::-webkit-progress-bar,
-			.catchProgressbar::-moz-progress-bar { 
-				background-color: {$foreground_color}; 
+			.catchProgressbar::-moz-progress-bar {
+				background-color: {$foreground_color};
 				border-radius: {$radius}px;
-				opacity: {$foreground_opacity}; 
+				opacity: {$foreground_opacity};
 			}
 		";
 
@@ -139,28 +149,28 @@ class Catch_Scroll_Progress_Bar_Public
 		 * class.
 		 */
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/catch-scroll-progress-bar-public.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/catch-scroll-progress-bar-public.js', array('jquery'), $this->version, true);
 	}
 	public function show_it()
 	{
 		$settings = catch_progress_bar_get_options();
 		if (isset($settings['home']) && 1 == $settings['home'] && (is_front_page())) {
-			display_progress_bar();
+			catch_progress_bar_display();
 		} elseif (isset($settings['blog']) && 1 == $settings['blog'] && (is_home() && !is_front_page())) {
-			display_progress_bar();
+			catch_progress_bar_display();
 		} elseif (isset($settings['archive']) && 1 == $settings['archive'] && (is_archive())) {
-			display_progress_bar();
-		} elseif (isset($settings['single']) && (is_singular() && !is_front_page())) {
+			catch_progress_bar_display();
+		} elseif (isset($settings['single']) && 1 == $settings['single'] && (is_singular() && !is_front_page())) {
 			$optionPostTypes = $settings['field_posttypes'];
 			$currentPostType = get_post_type();
 			if (isset($optionPostTypes[$currentPostType]) && ($optionPostTypes[$currentPostType] == 1)) {
-				display_progress_bar();
+				catch_progress_bar_display();
 			}
 		}
 	}
 }
 
-function display_progress_bar()
+function catch_progress_bar_display()
 {
 	$settings           = catch_progress_bar_get_options();
 	$height             = $settings['bar_height'];

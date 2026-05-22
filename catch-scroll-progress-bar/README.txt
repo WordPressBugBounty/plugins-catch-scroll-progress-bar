@@ -3,14 +3,14 @@ Contributors: catchplugins, catchthemes, sakinshrestha, pratikshrestha, maheshma
 Donate link: https://catchplugins.com/plugins/catch-scroll-progress-bar/
 Tags: progressbar, scroll, reading, progress bar
 Requires at least: 5.9
-Tested up to: 6.9
-Stable tag: 2.1
+Requires PHP: 7.4
+Tested up to: 7.0
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Catch Scroll Progress Bar - Catch Scroll Progress Bar is a simple, super-light WordPress progress bar plugin that has the most essential features to show the users how far they’ve scrolled through the current page or post.
+Catch Scroll Progress Bar is a simple, super-light WordPress progress bar plugin to sow the scrolled progress.
 
-Based on Reading progressbar Import https://wordpress.org/plugins/reading-progress-bar/
 
 == Description ==
 
@@ -43,6 +43,15 @@ Not so easy way (via FTP) :
 1. Main page
 
 == Changelog ==
+
+= 2.2 (Released: May 22, 2026) =
+* Bug Fixed: Progress bar was not showing on single posts even when the "Single page/post" option was turned on
+* Bug Fixed: Progress bar width could become incorrect after resizing the browser window; it now recalculates automatically
+* Bug Fixed: Several security improvements — all settings values are now properly validated and sanitized before being saved or displayed
+* Bug Fixed: Minor admin layout issue where the post type checkboxes section was not displaying correctly
+* Improved: Admin and frontend scripts now load in the page footer for better performance
+* Improved: Code cleaned up to meet the latest WordPress coding standards and pass the official Plugin Check tool
+* Compatibility check up to version 7.0
 
 = 2.1 (Released: February 25, 2026) =
 * Bug Fixed: Fixed JS enqueue path for adding catch themes tab item in Themes add theme section

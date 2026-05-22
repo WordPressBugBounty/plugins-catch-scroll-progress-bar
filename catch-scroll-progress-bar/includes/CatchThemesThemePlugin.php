@@ -42,8 +42,9 @@ class CatchThemesThemePlugin
 			wp_send_json_error();
 		}
 
+		$request = isset( $_REQUEST['request'] ) ? wp_unslash( $_REQUEST['request'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Mirrors WordPress core wp_ajax_query_themes(); capability check above is the authorization gate; fields validated downstream by WordPress core themes_api().
 		$args = wp_parse_args(
-			wp_unslash($_REQUEST['request']),
+			$request,
 			array(
 				'per_page' => 20,
 				'fields'   => array_merge(
@@ -70,7 +71,7 @@ class CatchThemesThemePlugin
 		$old_filter = isset($args['browse']) ? $args['browse'] : 'search';
 
 		/** This filter is documented in wp-admin/includes/class-wp-theme-install-list-table.php */
-		$args = apply_filters('install_themes_table_api_args_' . $old_filter, $args);
+		$args = apply_filters('install_themes_table_api_args_' . $old_filter, $args); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, not a custom hook.
 
 		$api = themes_api('query_themes', $args);
 
@@ -146,7 +147,7 @@ class CatchThemesThemePlugin
 	{
 
 		if ('theme-install.php' === $hook_suffix) {
-			wp_enqueue_script('our-themes-script', plugin_dir_url(__FILE__) . '../admin/js/our-themes.js', array('jquery'), '2018-05-16');
+			wp_enqueue_script('our-themes-script', plugin_dir_url(__FILE__) . '../admin/js/our-themes.js', array('jquery'), '2018-05-16', true);
 		}
 	}
 
@@ -430,7 +431,7 @@ class CatchThemesThemePlugin
 		 * @param array                $args    List of arguments, such as page, search term, and tags to query for.
 		 * @param WP_Customize_Manager $manager Instance of Customize manager.
 		 */
-		$themes = apply_filters('customize_load_themes', $themes, $args, $wp_customize);
+		$themes = apply_filters('customize_load_themes', $themes, $args, $wp_customize); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter, not a custom hook.
 
 		wp_send_json_success($themes);
 	}

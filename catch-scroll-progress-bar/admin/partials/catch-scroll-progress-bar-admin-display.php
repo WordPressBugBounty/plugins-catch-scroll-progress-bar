@@ -23,8 +23,6 @@ if (! defined('ABSPATH')) exit;
     <div class="catchp-content-wrapper">
         <div class="catchp_widget_settings">
 
-            <form id="catch-scroll-progress-bar" method="post" action="options.php">
-
                 <h2 class="nav-tab-wrapper">
                     <a class="nav-tab nav-tab-active" id="dashboard-tab" href="#dashboard"><?php esc_html_e('Dashboard', 'catch-scroll-progress-bar'); ?></a>
                     <a class="nav-tab" id="features-tab" href="#features"><?php esc_html_e('Features', 'catch-scroll-progress-bar'); ?></a>
@@ -46,11 +44,11 @@ if (! defined('ABSPATH')) exit;
                                         <?php echo esc_html__('Turn On Catch Themes & Catch Plugin tabs', 'catch-scroll-progress-bar');  ?>
                                     </td>
                                     <td>
-                                        <?php $ctp_options = ctp_get_options(); ?>
-                                        <div class="module-header <?php echo $ctp_options['theme_plugin_tabs'] ? 'active' : 'inactive'; ?>">
+                                        <?php $catch_progress_bar_ctp_options = ctp_get_options(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- ctp_ is a shared Catch library; variable renamed to carry plugin prefix. ?>
+                                        <div class="module-header <?php echo esc_attr( $catch_progress_bar_ctp_options['theme_plugin_tabs'] ? 'active' : 'inactive' ); ?>">
                                             <div class="switch">
                                                 <input type="hidden" name="ctp_tabs_nonce" id="ctp_tabs_nonce" value="<?php echo esc_attr(wp_create_nonce('ctp_tabs_nonce')); ?>" />
-                                                <input type="checkbox" id="ctp_options[theme_plugin_tabs]" class="ctp-switch" rel="theme_plugin_tabs" <?php checked(true, $ctp_options['theme_plugin_tabs']); ?>>
+                                                <input type="checkbox" id="ctp_options[theme_plugin_tabs]" class="ctp-switch" rel="theme_plugin_tabs" <?php checked(true, $catch_progress_bar_ctp_options['theme_plugin_tabs']); ?>>
                                                 <label for="ctp_options[theme_plugin_tabs]"></label>
                                             </div>
                                             <div class="loader"></div>
@@ -118,8 +116,7 @@ if (! defined('ABSPATH')) exit;
                             </ul>
                         </div><!-- .content -->
                     </div><!-- content-wrapper -->
-                </div> <!-- Featured -->
-            </form><!-- duplicate-page -->
+                </div> <!-- #features -->
         </div><!-- .catchp_widget_settings -->
         <?php require_once plugin_dir_path(dirname(__FILE__)) . '/partials/sidebar.php'; ?>
     </div><!---catch-content-wrapper---->

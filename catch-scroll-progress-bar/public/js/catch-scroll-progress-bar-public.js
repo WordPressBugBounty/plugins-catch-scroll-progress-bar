@@ -1,23 +1,33 @@
 (function( $ ) {
 	'use strict';
-	
-	// The DOM needs to be fully loaded (including graphics, iframes, etc)
-	$(window).load(function() {
 
-		// Maximum value for the progressbar
-		var winHeight = $(window).height(),
-		docHeight = $(document).height();
-		var max = docHeight - winHeight;
-		$('.catchProgressbar').attr('max', max);
+	jQuery(function($) {
+		var $bar = $('.catchProgressbar');
 
-		// Inital value (if the page is loaded within an anchor)
-		var value = $(window).scrollTop();
-		$('.catchProgressbar').attr('value', value);
-		// Maths & live update of progressbar value
-		$(document).on('scroll', function() {
-			value = $(window).scrollTop();
-			$('.catchProgressbar').attr('value', value);
-		});
+		// Calculate and set the progress bar's maximum value.
+		function updateMax() {
+			$bar.attr('max', $(document).height() - $(window).height());
+		}
+
+		// Update the current progress value based on scroll position.
+		function updateValue() {
+			$bar.attr('value', $(window).scrollTop());
+		}
+
+		// Set values immediately on DOM ready.
+		updateMax();
+		updateValue();
+
+		// Recalculate max once all resources (images, iframes) are loaded
+		// for a more accurate document height — avoids the missed-event
+		// problem of the old $(window).load() by initialising above first.
+		$(window).on('load', updateMax);
+
+		// Recalculate max when the viewport is resized.
+		$(window).on('resize', updateMax);
+
+		// Update progress value on every scroll.
+		$(document).on('scroll', updateValue);
 	});
-	
+
 })( jQuery );

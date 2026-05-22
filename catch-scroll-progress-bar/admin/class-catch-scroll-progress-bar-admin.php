@@ -71,7 +71,8 @@ class Catch_Scroll_Progress_Bar_Admin
 
 
 
-		if (isset($_GET['page']) && 'catch-scroll-progress-bar' == $_GET['page']) {
+		$current_page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'catch-scroll-progress-bar' === $current_page ) {
 			wp_enqueue_style($this->plugin_name . '-display-dashboard', plugin_dir_url(__FILE__) . 'css/catch-scroll-progress-bar-admin.css', array(), $this->version, 'all');
 		}
 	}
@@ -95,10 +96,11 @@ class Catch_Scroll_Progress_Bar_Admin
 		 * class.
 		 */
 
-		if (isset($_GET['page']) && 'catch-scroll-progress-bar' == $_GET['page']) {
-			wp_enqueue_script('matchHeight', plugin_dir_url(__FILE__) . 'js/jquery-matchHeight.min.js', array('jquery'), $this->version, false);
-			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/catch-scroll-progress-bar-admin.js', array('jquery', 'matchHeight', 'jquery-ui-tooltip'), $this->version, false);
-			wp_enqueue_script('catch-scroll-progress-bar-color-picker', plugin_dir_url(__FILE__) . 'js/wp-color-picker.js', array('wp-color-picker', 'jquery'), $this->version, false);
+		$current_page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'catch-scroll-progress-bar' === $current_page ) {
+			wp_enqueue_script('matchHeight', plugin_dir_url(__FILE__) . 'js/jquery-matchHeight.min.js', array('jquery'), $this->version, true);
+			wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/catch-scroll-progress-bar-admin.js', array('jquery', 'matchHeight', 'jquery-ui-tooltip'), $this->version, true);
+			wp_enqueue_script('catch-scroll-progress-bar-color-picker', plugin_dir_url(__FILE__) . 'js/wp-color-picker.js', array('wp-color-picker', 'jquery'), $this->version, true);
 		}
 	}
 
@@ -161,84 +163,88 @@ class Catch_Scroll_Progress_Bar_Admin
 	public function sanitize_callback($input)
 	{
 		if (isset($input['reset']) && $input['reset']) {
-			//If reset, restore defaults
+			// Reset requested — restore all defaults.
 			return catch_progress_bar_default_options();
 		}
 
-		// Verify the nonce before proceeding.
-		if (
-			(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-			||
-			(
-				! isset($_POST['catch_progress_bar_nonce'])
-				||
-				! wp_verify_nonce($_POST['catch_progress_bar_nonce'], CATCH_SCROLL_PROGRESS_BAR_BASENAME)
-			)
-			||
-			! check_admin_referer(CATCH_SCROLL_PROGRESS_BAR_BASENAME, 'catch_progress_bar_nonce')
-		) {
-
-			echo esc_html__('Sorry, your nonce did not verify.', 'catch-scroll-progress-bar');
-			exit;
-		} else {
-
-			if (null !== $input) {
-
-				$input['reset']   = (isset($input['reset']) && '1' == $input['reset']) ? '1' : '0';
-				$input['home']    = (isset($input['home']) && '1' == $input['home']) ? 1 : 0;
-				$input['blog']    = (isset($input['blog']) && '1' == $input['blog']) ? 1 : 0;
-				$input['archive'] = (isset($input['archive']) && '1' == $input['archive']) ? 1 : 0;
-				$input['single']  = (isset($input['single']) && '1' == $input['single']) ? 1 : 0;
-
-				$post_types       = get_post_types(array('public' => true), 'objects');
-				foreach ($post_types as $type => $obj) {
-					$input['field_posttypes'][$type] = (isset($input['field_posttypes'][$type]) && '1' == $input['field_posttypes'][$type]) ? 1 : 0;
-				}
-
-				if (isset($input['radius'])) {
-					$input['radius']             = sanitize_text_field($input['radius']);
-				}
-				if (isset($input['bar_height'])) {
-					$input['bar_height']         = sanitize_text_field($input['bar_height']);
-				}
-				if (isset($input['background_opacity'])) {
-					$input['background_opacity'] = floatval($input['background_opacity']);
-				}
-				if (isset($input['foreground_opacity'])) {
-					$input['foreground_opacity'] = floatval($input['foreground_opacity']);
-				}
-				if (isset($input['background_color']) && $input['background_color']) {
-					$input['background_color']   = sanitize_hex_color($input['background_color']);
-				}
-				if (isset($input['foreground_color']) && $input['foreground_color']) {
-					$input['foreground_color']   = sanitize_hex_color($input['foreground_color']);
-				}
-				return $input;
-			}
+		// The Settings API verifies its own nonce before calling this callback,
+		// so no additional nonce check is needed here.
+		if (null === $input) {
+			return $input;
 		}
+
+		$input['reset']   = (isset($input['reset'])   && '1' == $input['reset'])   ? '1' : '0';
+		$input['home']    = (isset($input['home'])    && '1' == $input['home'])    ? 1   : 0;
+		$input['blog']    = (isset($input['blog'])    && '1' == $input['blog'])    ? 1   : 0;
+		$input['archive'] = (isset($input['archive']) && '1' == $input['archive']) ? 1   : 0;
+		$input['single']  = (isset($input['single'])  && '1' == $input['single'])  ? 1   : 0;
+
+		$post_types = get_post_types(array('public' => true), 'objects');
+		foreach ($post_types as $type => $obj) {
+			$input['field_posttypes'][$type] = (isset($input['field_posttypes'][$type]) && '1' == $input['field_posttypes'][$type]) ? 1 : 0;
+		}
+
+		// Validate progress_bar_position against the allowed set.
+		if ( isset( $input['progress_bar_position'] ) ) {
+			$allowed_positions             = array( 'top', 'bottom' );
+			$input['progress_bar_position'] = in_array( $input['progress_bar_position'], $allowed_positions, true )
+				? $input['progress_bar_position']
+				: 'top';
+		}
+
+		// Use absint() for integer fields, not sanitize_text_field().
+		if (isset($input['radius'])) {
+			$input['radius']             = absint($input['radius']);
+		}
+		if (isset($input['bar_height'])) {
+			$input['bar_height']         = absint($input['bar_height']);
+		}
+		if (isset($input['background_opacity'])) {
+			$input['background_opacity'] = floatval($input['background_opacity']);
+		}
+		if (isset($input['foreground_opacity'])) {
+			$input['foreground_opacity'] = floatval($input['foreground_opacity']);
+		}
+		if (isset($input['background_color']) && $input['background_color']) {
+			$input['background_color']   = sanitize_hex_color($input['background_color']);
+		}
+		if (isset($input['foreground_color']) && $input['foreground_color']) {
+			$input['foreground_color']   = sanitize_hex_color($input['foreground_color']);
+		}
+
+		return $input;
 	}
 
 	function add_plugin_meta_links($meta_fields, $file)
 	{
 		if (CATCH_SCROLL_PROGRESS_BAR_BASENAME == $file) {
-			$meta_fields[] = "<a href='https://catchplugins.com/support-forum/forum/catch-scroll-progress-bar/' target='_blank'>Support Forum</a>";
-			$meta_fields[] = "<a href='https://wordpress.org/support/plugin/catch-scroll-progress-bar/reviews#new-post' target='_blank' title='Rate'>
-			        <i class='ct-rate-stars'>"
-				. "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
-				. "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
-				. "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
-				. "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
-				. "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
-				. "</i></a>";
 
-			$stars_color = "#ffb900";
+			$allowed_tags = array(
+				'a'       => array( 'href' => array(), 'target' => array(), 'title' => array() ),
+				'i'       => array( 'class' => array() ),
+				'svg'     => array( 'xmlns' => array(), 'width' => array(), 'height' => array(), 'viewbox' => array(), 'fill' => array(), 'stroke' => array(), 'stroke-width' => array(), 'stroke-linecap' => array(), 'stroke-linejoin' => array(), 'class' => array() ),
+				'polygon' => array( 'points' => array() ),
+			);
 
-			echo "<style>"
-				. ".ct-rate-stars{display:inline-block;color:" . esc_attr($stars_color) . ";position:relative;top:3px;}"
-				. ".ct-rate-stars svg{fill:" . esc_attr($stars_color) . ";}"
-				. ".ct-rate-stars svg:hover{fill:" . esc_attr($stars_color) . "}"
-				. ".ct-rate-stars svg:hover ~ svg{fill:none;}"
-				. "</style>";
+			$star_svg = "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>";
+
+			$meta_fields[] = wp_kses(
+				"<a href='https://catchplugins.com/support-forum/forum/catch-scroll-progress-bar/' target='_blank'>Support Forum</a>",
+				$allowed_tags
+			);
+			$meta_fields[] = wp_kses(
+				"<a href='https://wordpress.org/support/plugin/catch-scroll-progress-bar/reviews#new-post' target='_blank' title='Rate'><i class='ct-rate-stars'>" . str_repeat($star_svg, 5) . "</i></a>",
+				$allowed_tags
+			);
+
+			$stars_color = '#ffb900';
+			wp_add_inline_style(
+				$this->plugin_name . '-display-dashboard',
+				'.ct-rate-stars{display:inline-block;color:' . esc_attr($stars_color) . ';position:relative;top:3px;}'
+				. '.ct-rate-stars svg{fill:' . esc_attr($stars_color) . ';}'
+				. '.ct-rate-stars svg:hover{fill:' . esc_attr($stars_color) . ';}'
+				. '.ct-rate-stars svg:hover ~ svg{fill:none;}'
+			);
 		}
 
 		return $meta_fields;

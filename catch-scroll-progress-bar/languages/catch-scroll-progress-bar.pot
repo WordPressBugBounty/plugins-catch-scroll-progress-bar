@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Catch Scroll Progress Bar\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
-"POT-Creation-Date: 2026-02-25 15:26+0545\n"
+"POT-Creation-Date: 2026-05-22 13:05+0545\n"
 "PO-Revision-Date: 2016-12-12 09:23-0500\n"
 "Last-Translator: Sakin Shrestha <info@catchplugins.com>\n"
 "Language-Team: Catch Plugins <info@catchplugins.com>\n"
@@ -14,35 +14,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-KeywordsList: "
 "__;_e;_n:1,2;_x:1,2c;esc_attr_e;esc_attr__;_nx;_x;esc_html_e;esc_html__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_n_noop:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../admin/class-catch-scroll-progress-bar-admin.php:108
-#: ../admin/class-catch-scroll-progress-bar-admin.php:109
+#: ../admin/class-catch-scroll-progress-bar-admin.php:110
+#: ../admin/class-catch-scroll-progress-bar-admin.php:111
 msgid "Catch Scroll Progress Bar "
 msgstr ""
 
-#: ../admin/class-catch-scroll-progress-bar-admin.php:118
+#: ../admin/class-catch-scroll-progress-bar-admin.php:120
 #: ../admin/partials/catch-scroll-progress-bar-admin-display.php:19
 msgid "Catch Scroll Progress Bar"
 msgstr ""
 
-#: ../admin/class-catch-scroll-progress-bar-admin.php:119
-#: ../admin/class-catch-scroll-progress-bar-admin.php:137
+#: ../admin/class-catch-scroll-progress-bar-admin.php:121
+#: ../admin/class-catch-scroll-progress-bar-admin.php:139
 #: ../admin/partials/dashboard-display.php:22
 msgid "Settings"
 msgstr ""
 
-#: ../admin/class-catch-scroll-progress-bar-admin.php:148
+#: ../admin/class-catch-scroll-progress-bar-admin.php:150
 msgid "You do not have sufficient permissions to access this page."
-msgstr ""
-
-#: ../admin/class-catch-scroll-progress-bar-admin.php:181
-msgid "Sorry, your nonce did not verify."
 msgstr ""
 
 #: ../admin/partials/catch-scroll-progress-bar-admin-display.php:21
@@ -52,35 +48,35 @@ msgid ""
 "the current page or post"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:29
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:27
 msgid "Dashboard"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:30
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:69
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:28
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:67
 msgid "Features"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:36
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:34
 msgid "Catch Themes & Catch Plugins Tabs"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:41
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:39
 msgid ""
 "If you want to turn off Catch Themes & Catch Plugins tabs option in Add "
 "Themes and Add Plugins page, please uncheck the following option."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:46
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:44
 msgid "Turn On Catch Themes & Catch Plugin tabs"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:74
-#: ../admin/partials/dashboard-display.php:45
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:72
+#: ../admin/partials/dashboard-display.php:43
 msgid "Progress Bar Position"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:75
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:73
 msgid ""
 "Mostly progress bars are displayed on the top of the website. However, with "
 "our new WordPress progress bar plugin, you can exhibit your progress bar "
@@ -89,11 +85,11 @@ msgid ""
 "would not disturb other elements on your website."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:79
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:77
 msgid "Color Options and Opacity"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:80
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:78
 msgid ""
 "There is an unlimited color palette to choose the background and foreground "
 "of your reading progress bar. Choose the ones that go along with your "
@@ -102,11 +98,11 @@ msgid ""
 "and foreground, you can also select the opacity for both of the fields."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:84
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:82
 msgid "Progress Bar Height "
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:85
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:83
 msgid ""
 "The Progress Bar height setting allows you to choose the thickness of your "
 "reading progress bar. Some might like it thin to make it more elegant. "
@@ -114,22 +110,22 @@ msgid ""
 "and eye-catching. "
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:88
-#: ../admin/partials/dashboard-display.php:107
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:86
+#: ../admin/partials/dashboard-display.php:105
 msgid "Border Radius"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:89
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:87
 msgid ""
 "If you want to give your progress bar a tiny adornment, you can make it "
 "curvy by tweaking the Border Radius.  "
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:93
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:91
 msgid "Template Condition"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:94
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:92
 msgid ""
 "This is where you need to select the Template Condition for your progress "
 "bar as to where you want it to be displayed. You can choose the reading "
@@ -138,32 +134,32 @@ msgid ""
 "on the pages of your website.  "
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:98
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:96
 msgid "Light Weight"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:99
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:97
 msgid ""
 "Catch Scroll Progress Bar is a simple WordPress plugin to display an elegant "
 "reading bar that is extremely lightweight. It means you will not have to "
 "worry about your website getting slower because of the plugin."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:103
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:101
 msgid "Responsive Design"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:104
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:102
 msgid ""
 "Our new WordPress Progress Bar plugin comes with a responsive design, "
 "therefore, there is no need to strain about the plugin breaking your website."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:108
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:106
 msgid "Compatible with all WordPress Themes"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:109
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:107
 msgid ""
 "Gutenberg Compatibility is one of the major concerns nowadays for every "
 "plugin developer. Our new Catch Scroll Progress Bar plugin has been crafted "
@@ -171,11 +167,11 @@ msgid ""
 "smoothly on any WordPress theme."
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:113
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:111
 msgid "Incredible Support"
 msgstr ""
 
-#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:114
+#: ../admin/partials/catch-scroll-progress-bar-admin-display.php:112
 msgid ""
 "Catch Scroll Progress Bar comes with Incredible Support. Our plugin "
 "documentation answers most questions about using the plugin.  If you’re "
@@ -186,55 +182,55 @@ msgstr ""
 msgid "Plugin Options Saved."
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:56
+#: ../admin/partials/dashboard-display.php:54
 msgid "let you to decide the progress bar position."
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:61
+#: ../admin/partials/dashboard-display.php:59
 msgid "Background Color"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:71
+#: ../admin/partials/dashboard-display.php:69
 msgid "Foreground Color"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:79
+#: ../admin/partials/dashboard-display.php:77
 msgid "Background Opacity"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:83
+#: ../admin/partials/dashboard-display.php:81
 msgid ""
 "Background Opacity helps you to set the  transparency-level, 1 is not "
 "transparent at all where as 0 is completely transparent."
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:88
+#: ../admin/partials/dashboard-display.php:86
 msgid "Foreground Opacity"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:92
+#: ../admin/partials/dashboard-display.php:90
 msgid ""
 "Foreground Opacity helps you to set the  transparency-level, 1 is not "
 "transparent at all where as 0 is completely transparent."
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:98
+#: ../admin/partials/dashboard-display.php:96
 msgid "Progress Bar Height"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:102
+#: ../admin/partials/dashboard-display.php:100
 msgid "This will let you to set the height of the progress bar"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:111
+#: ../admin/partials/dashboard-display.php:109
 msgid "This will let you to set the border radius of the progress bar"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:118
+#: ../admin/partials/dashboard-display.php:116
 msgid "Select the Template Condition to progress bar"
 msgstr ""
 
-#: ../admin/partials/dashboard-display.php:149
+#: ../admin/partials/dashboard-display.php:147
 msgid "Select the Post type to  apply progress bar"
 msgstr ""
 
@@ -339,30 +335,34 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: ../includes/CatchThemesThemePlugin.php:161
+#: ../includes/CatchThemesThemePlugin.php:162
 msgid "Themes by CatchThemes"
 msgstr ""
 
-#: ../includes/CatchThemesThemePlugin.php:443
+#: ../includes/CatchThemesThemePlugin.php:444
 msgctxt "Plugin Installer"
 msgid "Catch Plugins"
 msgstr ""
 
-#: ../includes/CatchThemesThemePlugin.php:487
+#: ../includes/CatchThemesThemePlugin.php:488
 #, php-format
 msgid ""
 "You can use any of our free plugins or premium plugins from <a href=\"%s\" "
 "target=\"_blank\">Catch Plugins</a>."
 msgstr ""
 
-#: ../includes/ctp-tabs-removal.php:63
+#: ../includes/ctp-tabs-removal.php:88
 msgid "Invalid Nonce"
 msgstr ""
 
-#: ../includes/ctp-tabs-removal.php:66
+#: ../includes/ctp-tabs-removal.php:92
 msgid "Permission denied!"
 msgstr ""
 
-#: ../includes/ctp-tabs-removal.php:79
+#: ../includes/ctp-tabs-removal.php:100
+msgid "Invalid option name."
+msgstr ""
+
+#: ../includes/ctp-tabs-removal.php:109
 msgid "Connection Error. Please try again."
 msgstr ""

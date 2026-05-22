@@ -30,9 +30,9 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$option_name = 'catch_progress_bar_options';
+$catch_scroll_progress_bar_option_name = 'catch_progress_bar_options';
 
-delete_option( $option_name );
+delete_option( $catch_scroll_progress_bar_option_name );
 
 // For site options in Multisite.
-delete_site_option( $option_name );
+delete_site_option( $catch_scroll_progress_bar_option_name );
